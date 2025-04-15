@@ -23,11 +23,19 @@ A simple Chrome extension to automatically organize downloaded files into specif
 
 Since this extension is not on the Chrome Web Store, you need to load it manually:
 
-1.  **Download:** Download the extension files (or clone the repository) to a local folder on your computer.
+1.  **Clone the Repository:**
+    *   Open your terminal or command prompt.
+    *   Navigate to the directory where you want to store the project.
+    *   Run the following command:
+        ```bash
+        git clone <repository_url> download-organizer
+        ```
+        (Replace `<repository_url>` with the actual URL of the Git repository).
+    *   This will create a folder named `download-organizer` containing the extension files.
 2.  **Open Chrome Extensions:** Open Google Chrome, type `chrome://extensions` in the address bar, and press Enter.
 3.  **Enable Developer Mode:** In the top-right corner of the Extensions page, toggle the "Developer mode" switch ON.
 4.  **Load Unpacked:** Click the "Load unpacked" button that appears.
-5.  **Select Folder:** Navigate to the folder where you saved the extension files (the folder containing `manifest.json`, `popup.html`, etc.) and select it.
+5.  **Select Folder:** Navigate to the `download-organizer` folder (or whatever you named it in step 1) that was created by the `git clone` command and select it. Make sure you select the folder containing the `manifest.json` file.
 6.  **Done:** The Download Organizer extension should now appear in your list of extensions and be active. You'll see its icon (usually a default puzzle piece if no icon is set) in your Chrome toolbar.
 
 ## Usage
