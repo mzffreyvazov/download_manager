@@ -102,7 +102,7 @@ body {
       margin: 20px 0;
   }
 
-  .instruction {
+.instruction {
     font-size: 0.9em;
     color: #555;
     margin-bottom: 15px;
@@ -113,3 +113,45 @@ label {
   margin-top: 12px; /* Slightly increased margin */
   /* ... rest of label styles */
 }
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow tags to wrap to the next line */
+    gap: 5px; /* Spacing between tags */
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px; /* Space below the tags */
+    min-height: 25px; /* Ensure it has some height even when empty */
+    background-color: #fff; /* Match input background or choose another */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .tag {
+    display: inline-flex; /* Use flex for aligning text and remove button */
+    align-items: center;
+    background-color: #e0e0e0; /* Light grey background */
+    color: #333;
+    padding: 3px 8px;
+    border-radius: 12px; /* Rounded corners */
+    font-size: 0.9em;
+    cursor: default; /* Default cursor for the tag itself */
+  }
+  
+  .tag-remove {
+    margin-left: 6px;
+    font-weight: bold;
+    color: #777;
+    cursor: pointer; /* Pointer cursor only on the 'x' */
+    padding: 0 3px; /* Make the clickable area slightly larger */
+  }
+  
+  .tag-remove:hover {
+    color: #333;
+  }
+  
+  
+  /* Optional: Adjust input margin if needed */
+  #extensionInput {
+      margin-bottom: 0; /* Remove bottom margin as tags container is below */
+  }

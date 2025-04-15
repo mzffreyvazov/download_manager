@@ -5,13 +5,28 @@ function sanitizeFilename(name) {
     return name.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_');
   }
   
+  // Helper function to extract file extension (e.g., ".pdf", ".txt")
+  // Returns null if no extension found
+  function getFileExtension(filename) {
+      if (typeof filename !== 'string') return null;
+      const lastDotIndex = filename.lastIndexOf('.');
+      // Check if dot exists and is not the first character (hidden files)
+      // and is not the last character (e.g. "folder.")
+      if (lastDotIndex > 0 && lastDotIndex < filename.length - 1) {
+          return filename.substring(lastDotIndex).toLowerCase(); // Include the dot, lowercase
+      }
+      return null; // No valid extension found
+  }
+  
+  
   // Listener for the onDeterminingFilename event
   chrome.downloads.onDeterminingFilename.addListener((downloadItem, suggest) => {
     console.log("Download detected:", downloadItem.url, "Filename:", downloadItem.filename, "Referrer:", downloadItem.referrer);
   
     const sourceUrl = downloadItem.referrer || downloadItem.url; // Prefer referrer
-    const downloadFilenameLower = downloadItem.filename.toLowerCase(); // Lowercase filename for comparison
+    const downloadedExtension = getFileExtension(downloadItem.filename); // Extract the actual extension
   
+    // No need to check filename itself here unless specifically needed later
     if (!sourceUrl && !downloadItem.filename) {
       console.log("No source URL or filename found for download.");
       return false;
@@ -28,69 +43,63 @@ function sanitizeFilename(name) {
       let suggestedPath = null;
   
       console.log("Checking against filters:", filters);
+      console.log(`Downloaded file extension: ${downloadedExtension}`); // Log extracted extension
   
       // Find the first matching filter
       for (const filter of filters) {
-        // Ensure filter has necessary properties (basic check)
+        // Basic validation of filter object structure
         if (!filter || typeof filter.folderName !== 'string') {
             console.warn("Skipping invalid filter object:", filter);
             continue;
         }
-        
-        // Normalize filter criteria (use empty strings if properties are missing)
+  
+        // Normalize filter criteria
         const urlPattern = (filter.urlPattern || "").toLowerCase();
-        const fileExtension = (filter.fileExtension || "").toLowerCase(); // Already lowercase from popup.js, but safe
+        // Expecting an array, default to empty array if missing or not an array
+        const requiredExtensions = Array.isArray(filter.fileExtensions) ? filter.fileExtensions : [];
   
         let urlMatch = false;
         let extensionMatch = false;
   
         // --- Check URL Pattern Match ---
-        // Only check if a URL pattern is specified in the filter
         if (urlPattern) {
             if (sourceUrl && sourceUrl.toLowerCase().includes(urlPattern)) {
                 urlMatch = true;
             }
         } else {
-            // If no URL pattern is specified, this condition is considered met
-            urlMatch = true;
+            urlMatch = true; // No URL pattern required by this filter
         }
   
         // --- Check File Extension Match ---
-        // Only check if a file extension is specified in the filter
-        if (fileExtension) {
-             // Ensure it starts with a dot (should be guaranteed by popup)
-             if (fileExtension.startsWith('.') && downloadFilenameLower.endsWith(fileExtension)) {
+        if (requiredExtensions.length > 0) {
+             // Check if the downloaded file has an extension AND if that extension is in the filter's list
+             if (downloadedExtension && requiredExtensions.includes(downloadedExtension)) {
                  extensionMatch = true;
              }
+             // If requiredExtensions has items, but downloadedExtension is null or not in the list,
+             // extensionMatch remains false.
         } else {
-            // If no file extension is specified, this condition is considered met
+            // No extensions specified in this filter, so this condition is met
             extensionMatch = true;
         }
   
         // --- Determine if Filter Applies ---
-        // The filter applies only if BOTH the URL condition AND the extension condition are met.
-        // Since conditions are true by default if not specified, this works correctly:
-        // - URL only: urlMatch=true/false, extensionMatch=true => filterApplies = urlMatch
-        // - Extension only: urlMatch=true, extensionMatch=true/false => filterApplies = extensionMatch
-        // - Both: urlMatch=true/false, extensionMatch=true/false => filterApplies = urlMatch && extensionMatch
-        // - Neither specified (invalid filter, handled by popup): urlMatch=true, extensionMatch=true => filterApplies = true (but should have folderName)
         if (urlMatch && extensionMatch) {
           // Construct the new relative path
           const safeFolderName = sanitizeFilename(filter.folderName);
           let originalFilename = downloadItem.filename;
-          // Extract original filename correctly, even if Chrome provides a partial path
           const lastSeparatorIndex = Math.max(originalFilename.lastIndexOf('/'), originalFilename.lastIndexOf('\\'));
           if (lastSeparatorIndex !== -1) {
               originalFilename = originalFilename.substring(lastSeparatorIndex + 1);
           }
   
           suggestedPath = `${safeFolderName}/${originalFilename}`;
-          console.log(`Match found for filter (URL Pattern: "${filter.urlPattern || 'N/A'}", Extension: "${filter.fileExtension || 'N/A'}"). Suggesting path: ${suggestedPath}`);
+          console.log(`Match found for filter (URL Pattern: "${filter.urlPattern || 'N/A'}", Extensions: "[${(filter.fileExtensions || []).join(', ')}]"). Suggesting path: ${suggestedPath}`);
           break; // Stop checking once a match is found
         }
       } // End of loop through filters
   
-      // If a matching filter was found, suggest the new path
+      // Suggest path or log default behavior (same as before)
       if (suggestedPath) {
         suggest({
           filename: suggestedPath,
@@ -106,4 +115,4 @@ function sanitizeFilename(name) {
     return true;
   });
   
-  console.log("Download Organizer background script loaded (with extension filtering).");
+  console.log("Download Organizer background script loaded (with multi-extension tag support).");
