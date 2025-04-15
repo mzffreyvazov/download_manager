@@ -9,14 +9,19 @@
 
   <div class="filter-form">
     <h2>Add New Filter</h2>
-    <label for="urlPattern">If download is from URL containing:</label>
+    <p class="instruction">Define criteria to move downloads to a subfolder:</p>
+
+    <label for="urlPattern">If download is from URL containing (optional):</label>
     <input type="text" id="urlPattern" placeholder="e.g., myuniversity.edu/courses">
 
+    <label for="fileExtension">And file extension is (optional):</label>
+    <input type="text" id="fileExtension" placeholder="e.g., .pdf or .zip (start with a dot)">
+
     <label for="folderName">Save to subfolder named:</label>
-    <input type="text" id="folderName" placeholder="e.g., University_Notes">
+    <input type="text" id="folderName" placeholder="e.g., University_PDFs">
 
     <button id="addFilterBtn">Add Filter</button>
-    <p class="note">Note: Folders are created inside your default Chrome Downloads directory.</p>
+    <p class="note">Note: Folders are created inside your default Chrome Downloads directory. At least one condition (URL or Extension) must be provided.</p>
   </div>
 
   <hr>
