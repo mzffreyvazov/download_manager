@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Download Organizer</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>Download Organizer Filters</h1>
+
+  <div class="filter-form">
+    <h2>Add New Filter</h2>
+    <label for="urlPattern">If download is from URL containing:</label>
+    <input type="text" id="urlPattern" placeholder="e.g., myuniversity.edu/courses">
+
+    <label for="folderName">Save to subfolder named:</label>
+    <input type="text" id="folderName" placeholder="e.g., University_Notes">
+
+    <button id="addFilterBtn">Add Filter</button>
+    <p class="note">Note: Folders are created inside your default Chrome Downloads directory.</p>
+  </div>
+
+  <hr>
+
+  <h2>Current Filters</h2>
+  <ul id="filterList">
+    <!-- Filters will be loaded here by JavaScript -->
+    <li>Loading filters...</li>
+  </ul>
+
+  <script src="popup.js"></script>
+</body>
+</html>

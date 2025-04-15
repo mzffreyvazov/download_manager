@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "Download Organizer",
+    "version": "1.0",
+    "description": "Save downloads to specific folders based on the source URL.",
+    "permissions": [
+      "downloads", 
+      "storage"
+    ],
+    "background": {
+      "service_worker": "background.js" 
+    },
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }

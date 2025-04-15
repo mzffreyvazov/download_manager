@@ -1,0 +1,103 @@
+/* popup.css */
+body {
+    font-family: sans-serif;
+    width: 400px; /* Adjust width as needed */
+    padding: 10px;
+    background-color: #f4f4f4;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .filter-form {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+  }
+  
+  label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-size: 0.9em;
+  }
+  
+  input[type="text"] {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button.delete-btn {
+      background-color: #dc3545;
+      padding: 3px 8px;
+      font-size: 0.8em;
+      margin-left: 10px;
+      float: right; /* Position delete button to the right */
+  }
+  
+  button.delete-btn:hover {
+      background-color: #c82333;
+  }
+  
+  
+  #filterList {
+    list-style: none;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  #filterList li {
+    padding: 10px 15px;
+    border-bottom: 1px solid #eee;
+    display: flex; /* Use flexbox for alignment */
+    justify-content: space-between; /* Space out content and button */
+    align-items: center; /* Vertically align items */
+  }
+  
+  #filterList li:last-child {
+    border-bottom: none;
+  }
+  
+  #filterList li .filter-text {
+   flex-grow: 1; /* Allow text to take available space */
+   margin-right: 10px; /* Space between text and button */
+   font-size: 0.9em;
+  }
+  
+  .note {
+      font-size: 0.8em;
+      color: #666;
+      margin-top: 10px;
+  }
+  
+  hr {
+      border: 0;
+      height: 1px;
+      background-color: #ccc;
+      margin: 20px 0;
+  }
