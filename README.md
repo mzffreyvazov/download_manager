@@ -4,7 +4,7 @@ A simple Chrome extension to automatically organize downloaded files into specif
 
 ## Features
 
-*   **URL Pattern Matching:** Define filters based on parts of the download source URL (referrer or direct URL). Supports wildcard (`*`) matching for flexible patterns (e.g., `*.university.edu/*syllabus*`).
+*   **URL Pattern Matching:** Define filters based on parts of the download source URL (referrer or direct URL). Supports wildcard (`*`) matching for flexible patterns (e.g., `*.university.edu/*subject=123456*`).
 *   **File Extension Filtering:** Specify one or more file extensions (e.g., `.pdf`, `.docx`, `.zip`) to trigger a filter.
 *   **Custom Subfolders:** Assign a specific subfolder name for downloads matching the filter criteria. Folders are created within your default Chrome Downloads directory.
 *   **Simple UI:** Manage filters easily through the extension popup. Add new filters, view existing ones, and delete them as needed.
