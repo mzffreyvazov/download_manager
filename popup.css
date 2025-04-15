@@ -1,7 +1,7 @@
-/* popup.css */
+
 body {
     font-family: sans-serif;
-    width: 400px; /* Adjust width as needed */
+    width: 400px;
     padding: 10px;
     background-color: #f4f4f4;
   }
@@ -55,7 +55,7 @@ body {
       padding: 3px 8px;
       font-size: 0.8em;
       margin-left: 10px;
-      float: right; /* Position delete button to the right */
+      float: right;
   }
   
   button.delete-btn:hover {
@@ -66,71 +66,71 @@ body {
   #filterList {
     list-style: none;
     padding: 0;
-    /* Remove background/shadow from UL if applying to LI */
-    /* background-color: #fff; */
-    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
+   
+   
+   
   }
   
   #filterList li {
-    /* Style individual filter items */
+   
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
-    margin-bottom: 10px; /* Space between filter items */
+    margin-bottom: 10px;
     padding: 12px 15px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-    /* display: flex; */ /* Remove flex if using internal divs for layout */
-    /* justify-content: space-between; */
-    /* align-items: center; */
+   
+   
+   
   }
   
   #filterList li:last-child {
-    /* border-bottom: none; */ /* Remove if using margin-bottom */
+   
     margin-bottom: 0;
   }
   
-  /* Remove old rule */
-  /* #filterList li .filter-text { ... } */
+ 
+ 
 
-  /* New styles for filter item structure */
+ 
   .filter-item-content {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start; /* Align items to the top */
-    gap: 10px; /* Space between description and delete button */
+    align-items: flex-start;
+    gap: 10px;
   }
 
   .filter-description {
-    flex-grow: 1; /* Allow description to take available space */
+    flex-grow: 1;
   }
 
   .filter-conditions, .filter-action {
-    margin-bottom: 5px; /* Space between conditions and action */
+    margin-bottom: 5px;
   }
 
   .filter-conditions span, .filter-action span {
-      display: block; /* Make each condition/action part appear on a new line */
+      display: block;
       font-size: 0.9em;
       color: #333;
       line-height: 1.4;
   }
 
   .filter-conditions strong, .filter-action strong {
-      color: #0056b3; /* Highlight keywords */
+      color: #0056b3;
       font-weight: 600;
   }
 
   .filter-action {
-      margin-top: 8px; /* Add space before the action line */
+      margin-top: 8px;
       padding-top: 5px;
-      border-top: 1px dashed #eee; /* Separator line */
+      border-top: 1px dashed #eee;
   }
 
   .filter-item-content .delete-btn {
-      /* Adjust delete button positioning if needed */
-      flex-shrink: 0; /* Prevent button from shrinking */
-      margin-top: 0; /* Align with the top of the description */
-      /* float: none; */ /* Remove float if using flex */
+     
+      flex-shrink: 0;
+      margin-top: 0;
+     
   }
 
   .no-filters-message {
@@ -140,7 +140,7 @@ body {
       padding: 15px;
   }
 
-  /* --- End New Styles --- */
+ 
 
   .note {
       font-size: 0.8em;
@@ -161,42 +161,42 @@ body {
     margin-bottom: 15px;
 }
 
-/* You might want to adjust margins if things look cramped */
+
 label {
-  margin-top: 12px; /* Slightly increased margin */
-  /* ... rest of label styles */
+  margin-top: 12px;
+ 
 }
 
 .tags-container {
     display: flex;
-    flex-wrap: wrap; /* Allow tags to wrap to the next line */
-    gap: 5px; /* Spacing between tags */
+    flex-wrap: wrap;
+    gap: 5px;
     padding: 5px;
     margin-top: 5px;
-    margin-bottom: 10px; /* Space below the tags */
-    min-height: 25px; /* Ensure it has some height even when empty */
-    background-color: #fff; /* Match input background or choose another */
+    margin-bottom: 10px;
+    min-height: 25px;
+    background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 3px;
   }
   
   .tag {
-    display: inline-flex; /* Use flex for aligning text and remove button */
+    display: inline-flex;
     align-items: center;
-    background-color: #e0e0e0; /* Light grey background */
+    background-color: #e0e0e0;
     color: #333;
     padding: 3px 8px;
-    border-radius: 12px; /* Rounded corners */
+    border-radius: 12px;
     font-size: 0.9em;
-    cursor: default; /* Default cursor for the tag itself */
+    cursor: default;
   }
   
   .tag-remove {
     margin-left: 6px;
     font-weight: bold;
     color: #777;
-    cursor: pointer; /* Pointer cursor only on the 'x' */
-    padding: 0 3px; /* Make the clickable area slightly larger */
+    cursor: pointer;
+    padding: 0 3px;
   }
   
   .tag-remove:hover {
@@ -204,7 +204,7 @@ label {
   }
   
   
-  /* Optional: Adjust input margin if needed */
+ 
   #extensionInput {
-      margin-bottom: 0; /* Remove bottom margin as tags container is below */
+      margin-bottom: 0;
   }
