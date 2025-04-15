@@ -85,49 +85,76 @@ function loadFilters() {
     const filters = result.filters || [];
 
     if (filters.length === 0) {
-        filterListUl.innerHTML = '<li>No filters defined yet.</li>';
+        // Use a specific class for styling the "no filters" message
+        const li = document.createElement('li');
+        li.className = 'no-filters-message';
+        li.textContent = 'No filters defined yet.';
+        filterListUl.appendChild(li);
         return;
     }
 
     filters.forEach((filter, index) => {
       const li = document.createElement('li');
+      li.className = 'filter-item'; // Add a class for potential item-level styling
 
-      const textSpan = document.createElement('span');
-      textSpan.className = 'filter-text';
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'filter-item-content';
 
-      // Build the description string based on provided filter criteria
-      let descriptionParts = [];
+      const descriptionDiv = document.createElement('div');
+      descriptionDiv.className = 'filter-description';
+
+      const conditionsDiv = document.createElement('div');
+      conditionsDiv.className = 'filter-conditions';
+      conditionsDiv.innerHTML = '<strong>IF:</strong>'; // Start with "IF:"
+
+      let conditionsMet = false; // Track if any condition exists
+
+      // Add URL condition if present
       if (filter.urlPattern) {
-          descriptionParts.push(`URL contains "${filter.urlPattern}"`);
+          const urlSpan = document.createElement('span');
+          urlSpan.innerHTML = `&nbsp;&nbsp;- URL contains "<code>${filter.urlPattern}</code>"`;
+          conditionsDiv.appendChild(urlSpan);
+          conditionsMet = true;
       }
-      // Now handle the array of extensions
+
+      // Add Extension condition if present
       if (filter.fileExtensions && filter.fileExtensions.length > 0) {
-          // Join the extensions for display
-          descriptionParts.push(`File type is one of "${filter.fileExtensions.join(', ')}"`);
+          const extSpan = document.createElement('span');
+          // Use <code> for better visual distinction of extensions
+          const extHtml = filter.fileExtensions.map(ext => `<code>${ext}</code>`).join(', ');
+          extSpan.innerHTML = `&nbsp;&nbsp;- File type is one of ${extHtml}`;
+          conditionsDiv.appendChild(extSpan);
+          conditionsMet = true;
       }
 
-      let filterDescription = "If ";
-      if (descriptionParts.length > 0) {
-          filterDescription += descriptionParts.join(' AND ');
-      } else {
-          // This case should ideally be prevented by validation on add
-          filterDescription += " (Error: No criteria found) ";
+      // Handle case where a filter might have been saved without conditions (should be prevented by UI)
+      if (!conditionsMet) {
+          const noCondSpan = document.createElement('span');
+          noCondSpan.innerHTML = '&nbsp;&nbsp;- <i>(No conditions specified)</i>';
+          conditionsDiv.appendChild(noCondSpan);
       }
-      filterDescription += `, save to "${filter.folderName}/"`;
 
-      textSpan.textContent = filterDescription;
+      descriptionDiv.appendChild(conditionsDiv);
+
+      // Add Action part
+      const actionDiv = document.createElement('div');
+      actionDiv.className = 'filter-action';
+      actionDiv.innerHTML = `<strong>THEN:</strong> Save to "<code>${filter.folderName}/</code>"`;
+      descriptionDiv.appendChild(actionDiv);
 
 
+      // Create Delete Button (remains the same logic)
       const deleteBtn = document.createElement('button');
       deleteBtn.textContent = 'Delete';
       deleteBtn.className = 'delete-btn';
-      deleteBtn.dataset.filterIndex = index; // Store index to identify which filter to delete
+      deleteBtn.dataset.filterIndex = index;
+      deleteBtn.addEventListener('click', handleDeleteFilter);
 
-      deleteBtn.addEventListener('click', handleDeleteFilter); // Uses the existing delete function
-
-      li.appendChild(textSpan);
-      li.appendChild(deleteBtn);
-      filterListUl.appendChild(li);
+      // Assemble the list item
+      contentDiv.appendChild(descriptionDiv); // Add description part
+      contentDiv.appendChild(deleteBtn);      // Add delete button next to description
+      li.appendChild(contentDiv);             // Add the main content container to the list item
+      filterListUl.appendChild(li);           // Add the list item to the list
     });
   });
 }

@@ -66,29 +66,82 @@ body {
   #filterList {
     list-style: none;
     padding: 0;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Remove background/shadow from UL if applying to LI */
+    /* background-color: #fff; */
+    /* box-shadow: 0 2px 4px rgba(0,0,0,0.1); */
   }
   
   #filterList li {
-    padding: 10px 15px;
-    border-bottom: 1px solid #eee;
-    display: flex; /* Use flexbox for alignment */
-    justify-content: space-between; /* Space out content and button */
-    align-items: center; /* Vertically align items */
+    /* Style individual filter items */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space between filter items */
+    padding: 12px 15px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    /* display: flex; */ /* Remove flex if using internal divs for layout */
+    /* justify-content: space-between; */
+    /* align-items: center; */
   }
   
   #filterList li:last-child {
-    border-bottom: none;
+    /* border-bottom: none; */ /* Remove if using margin-bottom */
+    margin-bottom: 0;
   }
   
-  #filterList li .filter-text {
-   flex-grow: 1; /* Allow text to take available space */
-   margin-right: 10px; /* Space between text and button */
-   font-size: 0.9em;
+  /* Remove old rule */
+  /* #filterList li .filter-text { ... } */
+
+  /* New styles for filter item structure */
+  .filter-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align items to the top */
+    gap: 10px; /* Space between description and delete button */
   }
-  
+
+  .filter-description {
+    flex-grow: 1; /* Allow description to take available space */
+  }
+
+  .filter-conditions, .filter-action {
+    margin-bottom: 5px; /* Space between conditions and action */
+  }
+
+  .filter-conditions span, .filter-action span {
+      display: block; /* Make each condition/action part appear on a new line */
+      font-size: 0.9em;
+      color: #333;
+      line-height: 1.4;
+  }
+
+  .filter-conditions strong, .filter-action strong {
+      color: #0056b3; /* Highlight keywords */
+      font-weight: 600;
+  }
+
+  .filter-action {
+      margin-top: 8px; /* Add space before the action line */
+      padding-top: 5px;
+      border-top: 1px dashed #eee; /* Separator line */
+  }
+
+  .filter-item-content .delete-btn {
+      /* Adjust delete button positioning if needed */
+      flex-shrink: 0; /* Prevent button from shrinking */
+      margin-top: 0; /* Align with the top of the description */
+      /* float: none; */ /* Remove float if using flex */
+  }
+
+  .no-filters-message {
+      color: #666;
+      font-style: italic;
+      text-align: center;
+      padding: 15px;
+  }
+
+  /* --- End New Styles --- */
+
   .note {
       font-size: 0.8em;
       color: #666;
