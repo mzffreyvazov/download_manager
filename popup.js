@@ -112,7 +112,8 @@ function loadFilters() {
       // Add URL condition if present
       if (filter.urlPattern) {
           const urlSpan = document.createElement('span');
-          urlSpan.innerHTML = `&nbsp;&nbsp;- URL contains "<code>${filter.urlPattern}</code>"`;
+          // Updated text to mention wildcard matching
+          urlSpan.innerHTML = `&nbsp;&nbsp;- URL matches pattern "<code>${filter.urlPattern}</code>"`;
           conditionsDiv.appendChild(urlSpan);
           conditionsMet = true;
       }
