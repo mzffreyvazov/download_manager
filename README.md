@@ -28,9 +28,8 @@ Since this extension is not on the Chrome Web Store, you need to load it manuall
     *   Navigate to the directory where you want to store the project.
     *   Run the following command:
         ```bash
-        git clone <repository_url> download-organizer
+        git clone https://github.com/mzffreyvazov/download_manager.git download-organizer
         ```
-        (Replace `<repository_url>` with the actual URL of the Git repository).
     *   This will create a folder named `download-organizer` containing the extension files.
 2.  **Open Chrome Extensions:** Open Google Chrome, type `chrome://extensions` in the address bar, and press Enter.
 3.  **Enable Developer Mode:** In the top-right corner of the Extensions page, toggle the "Developer mode" switch ON.
