@@ -11,13 +11,13 @@ A simple Chrome extension to automatically organize downloaded files into specif
 
 ## Screenshots
 
-*(Add screenshots here later)*
-
 **Popup Interface:**
-`[Screenshot of the extension popup showing the filter form and current filters]`
+![image](https://github.com/user-attachments/assets/13d82a7a-7bf2-4339-a145-cc0248248a99)
+
 
 **Example Filter:**
-`[Screenshot highlighting an example filter in the list]`
+![image](https://github.com/user-attachments/assets/2e540468-db88-42f1-9d59-0e73cdaf1eec)
+
 
 ## Installation
 
